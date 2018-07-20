@@ -15,7 +15,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  * @method Planet[]    findAll()
  * @method Planet[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PlanetRepository extends ServiceEntityRepository
+class PlanetRepository extends ServiceEntityRepository implements PlanetRepositoryInterface
 {
 
     /**

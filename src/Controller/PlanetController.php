@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Planet;
-use App\Repository\PlanetRepository;
+use App\Repository\PlanetRepositoryInterface;
 use Doctrine\ORM\ORMException;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
@@ -21,18 +21,16 @@ class PlanetController extends FOSRestController
 {
 
     /**
-     * This variable contains a PlanetRepository
-     *
-     * @var PlanetRepository $planetRepository
+     * @var PlanetRepositoryInterface $planetRepository
      */
     private $planetRepository;
 
     /**
      * PlanetController constructor.
      *
-     * @param PlanetRepository $planetRepository
+     * @param PlanetRepositoryInterface $planetRepository
      */
-    public function __construct(PlanetRepository $planetRepository)
+    public function __construct(PlanetRepositoryInterface $planetRepository)
     {
         $this->planetRepository = $planetRepository;
     }
