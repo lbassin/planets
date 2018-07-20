@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Planet;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManager;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -25,32 +26,18 @@ class PlanetRepository extends ServiceEntityRepository
         parent::__construct($registry, Planet::class);
     }
 
-    //    /**
-    //     * @return Planet[] Returns an array of Planet objects
-    //     */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @param Planet $planet
+     *
+     * @return void
+     * @throws \Doctrine\ORM\ORMException
+     */
+    public function save(Planet $planet): void
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        /** @var EntityManager $entityManager */
+        $entityManager = $this->getEntityManager();
 
-    /*
-    public function findOneBySomeField($value): ?Planet
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $entityManager->persist($planet);
+        $entityManager->flush();
     }
-    */
 }

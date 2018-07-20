@@ -3,7 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Planet;
-use Doctrine\Common\Persistence\ObjectManager;
+use App\Repository\PlanetRepository;
+use Doctrine\ORM\ORMException;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\View\View;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -18,7 +19,23 @@ class PlanetController extends FOSRestController
 {
 
     /**
-     * @Rest\View()
+     * This variable contains a PlanetRepository
+     *
+     * @var PlanetRepository $planetRepository
+     */
+    private $planetRepository;
+
+    /**
+     * PlanetController constructor.
+     *
+     * @param PlanetRepository $planetRepository
+     */
+    public function __construct(PlanetRepository $planetRepository)
+    {
+        $this->planetRepository = $planetRepository;
+    }
+
+    /**
      * @Rest\Post("/planets")
      * @ParamConverter("planet", converter="fos_rest.request_body")
      *
@@ -26,6 +43,7 @@ class PlanetController extends FOSRestController
      * @param ConstraintViolationListInterface $validationErrors
      *
      * @return Response
+     * @throws ORMException
      */
     public function postArticleAction(Planet $planet, ConstraintViolationListInterface $validationErrors)
     {
@@ -33,10 +51,7 @@ class PlanetController extends FOSRestController
             return $this->handleView(View::create($validationErrors, Response::HTTP_BAD_REQUEST));
         }
 
-        /** @var ObjectManager $em */
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($planet);
-        $em->flush();
+        $this->planetRepository->save($planet);
 
         return $this->handleView(View::create($planet, Response::HTTP_CREATED));
     }
