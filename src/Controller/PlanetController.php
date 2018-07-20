@@ -68,4 +68,16 @@ class PlanetController extends FOSRestController
 
         return $this->handleView(View::create($planets, Response::HTTP_OK));
     }
+
+    /**
+     * @Rest\Get("/planets/{id}")
+     *
+     * @param Planet $planet
+     *
+     * @return Response
+     */
+    public function getPlanetAction(Planet $planet): Response
+    {
+        return $this->handleView(View::create($planet, Response::HTTP_OK));
+    }
 }
