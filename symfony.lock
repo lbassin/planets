@@ -203,6 +203,9 @@
             "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
         }
     },
+    "symfony/options-resolver": {
+        "version": "v4.1.1"
+    },
     "symfony/orm-pack": {
         "version": "v1.0.5"
     },
@@ -222,6 +225,18 @@
         "version": "v4.1.1"
     },
     "symfony/templating": {
+        "version": "v4.1.1"
+    },
+    "symfony/translation": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "6bcd6c570c017ea6ae5a7a6a027c929fd3542cd8"
+        }
+    },
+    "symfony/validator": {
         "version": "v4.1.1"
     },
     "symfony/yaml": {

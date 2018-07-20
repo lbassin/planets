@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @author Laurent Bassin <laurent@bassin.info>
@@ -22,18 +23,24 @@ class Planet
     private $id;
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull()
+     * @Assert\Length(min=0, max=255)
      *
      * @var string $name
      */
     private $name;
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotNull()
+     * @Assert\GreaterThanOrEqual(0)
      *
      * @var integer $age
      */
     private $age;
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotNull()
+     * @Assert\GreaterThanOrEqual(0)
      *
      * @var integer $population
      */
