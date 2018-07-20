@@ -109,4 +109,22 @@ class PlanetControllerTest extends WebTestCase
          */
         $this->controller->postCreatePlanetAction($planet, $validationErrors);
     }
+
+    /**
+     *
+     */
+    public function testGetPlanetsAction()
+    {
+        $this->planetRepository
+            ->expects($this->once())
+            ->method('getList')
+            ->will($this->returnValue([]));
+
+        $this->viewHandler
+            ->expects($this->once())
+            ->method('handle')
+            ->will($this->returnValue(new Response()));
+
+        $this->controller->getPlanetsAction();
+    }
 }
