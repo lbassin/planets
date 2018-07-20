@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Tests\Controller;
 
@@ -35,7 +35,7 @@ class PlanetControllerTest extends WebTestCase
     /**
      *
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         /** @var MockObject $planetRepository */
         $this->planetRepository = $this->getMockBuilder(PlanetRepositoryInterface::class)->getMock();
@@ -50,7 +50,7 @@ class PlanetControllerTest extends WebTestCase
     /**
      * @throws ORMException
      */
-    public function testPostCreatePlanetActionWithCorrectData()
+    public function testPostCreatePlanetActionWithCorrectData(): void
     {
         /** @var MockObject $planet */
         $planet = $this->getMockBuilder(Planet::class)->getMock();
@@ -82,7 +82,7 @@ class PlanetControllerTest extends WebTestCase
     /**
      * @throws ORMException
      */
-    public function testPostCreatePlanetActionWithMissingData()
+    public function testPostCreatePlanetActionWithMissingData(): void
     {
         /** @var MockObject $planet */
         $planet = $this->getMockBuilder(Planet::class)->getMock();
@@ -113,7 +113,7 @@ class PlanetControllerTest extends WebTestCase
     /**
      *
      */
-    public function testGetPlanetsAction()
+    public function testGetPlanetsAction(): void
     {
         $this->planetRepository
             ->expects($this->once())
@@ -126,5 +126,22 @@ class PlanetControllerTest extends WebTestCase
             ->will($this->returnValue(new Response()));
 
         $this->controller->getPlanetsAction();
+    }
+
+    /**
+     *
+     */
+    public function testGetPlanetAction(): void
+    {
+        /** @var MockObject $planet */
+        $planet = $this->getMockBuilder(Planet::class)->getMock();
+
+        $this->viewHandler
+            ->expects($this->once())
+            ->method('handle')
+            ->will($this->returnValue(new Response()));
+
+        /** @var Planet $planet */
+        $this->controller->getPlanetAction($planet);
     }
 }
