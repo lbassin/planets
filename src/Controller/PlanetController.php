@@ -47,11 +47,13 @@ class PlanetController extends FOSRestController
     public function postCreatePlanetAction(Planet $planet, ConstraintViolationListInterface $validationErrors): Response
     {
         if ($validationErrors->count() > 0) {
+            // Une erreur est survenue a cause des données fournies, cette requete tombera toujours en erreur
             return $this->handleView($this->view($validationErrors, Response::HTTP_BAD_REQUEST));
         }
 
         $this->planetRepository->save($planet);
 
+        // La ressources est bien ajouté en bdd, on indique donc le code 201 (Created)
         return $this->handleView($this->view($planet, Response::HTTP_CREATED));
     }
 
@@ -65,6 +67,7 @@ class PlanetController extends FOSRestController
         /** @var Planet[] $planets */
         $planets = $this->planetRepository->getList();
 
+        // Rien à signaler, tout va bien, HTTP 200
         return $this->handleView($this->view($planets, Response::HTTP_OK));
     }
 
@@ -77,6 +80,7 @@ class PlanetController extends FOSRestController
      */
     public function getPlanetAction(Planet $planet): Response
     {
+        // Rien à signaler, tout va bien, HTTP 200
         return $this->handleView($this->view($planet, Response::HTTP_OK));
     }
 }
