@@ -66,7 +66,7 @@ class PlanetController extends FOSRestController
     public function getPlanetsAction(): Response
     {
         /** @var Planet[] $planets */
-        $planets = $this->planetRepository->findAll();
+        $planets = $this->planetRepository->getList();
 
         return $this->handleView(View::create($planets, Response::HTTP_OK));
     }

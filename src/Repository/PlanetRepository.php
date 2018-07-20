@@ -40,4 +40,12 @@ class PlanetRepository extends ServiceEntityRepository
         $entityManager->persist($planet);
         $entityManager->flush();
     }
+
+    /**
+     * @return array
+     */
+    public function getList(): array
+    {
+        return $this->createQueryBuilder('planet')->select(['planet.id', 'planet.name'])->getQuery()->getResult();
+    }
 }
