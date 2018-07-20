@@ -10,7 +10,7 @@ fos_rest:
         serialize_null: true
     format_listener:
         rules:
-            - { path: ^/, prefer_extension: true, fallback_format: json, priorities: [ json ] }
+            - { path: ^/api, prefer_extension: true, fallback_format: json, priorities: [ json ] }
     exception:
         enabled: true
         codes:
@@ -19,7 +19,5 @@ fos_rest:
         messages:
             Doctrine\ORM\ORMException: false
             Symfony\Component\HttpKernel\Exception\NotFoundHttpException: false
-
-#    param_fetcher_listener:  true
-#    allowed_methods_listener:  true
-#    routing_loader: true
+    zone:
+      - { path: ^/api* }
