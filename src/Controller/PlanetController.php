@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Controller;
 
@@ -45,7 +45,7 @@ class PlanetController extends FOSRestController
      * @return Response
      * @throws ORMException
      */
-    public function postArticleAction(Planet $planet, ConstraintViolationListInterface $validationErrors)
+    public function postCreatePlanetAction(Planet $planet, ConstraintViolationListInterface $validationErrors): Response
     {
         if (count($validationErrors) > 0) {
             return $this->handleView(View::create($validationErrors, Response::HTTP_BAD_REQUEST));
