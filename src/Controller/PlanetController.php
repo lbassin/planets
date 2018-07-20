@@ -7,7 +7,6 @@ use App\Repository\PlanetRepositoryInterface;
 use Doctrine\ORM\ORMException;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
-use FOS\RestBundle\View\View;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
@@ -47,13 +46,13 @@ class PlanetController extends FOSRestController
      */
     public function postCreatePlanetAction(Planet $planet, ConstraintViolationListInterface $validationErrors): Response
     {
-        if (count($validationErrors) > 0) {
-            return $this->handleView(View::create($validationErrors, Response::HTTP_BAD_REQUEST));
+        if ($validationErrors->count() > 0) {
+            return $this->handleView($this->view($validationErrors, Response::HTTP_BAD_REQUEST));
         }
 
         $this->planetRepository->save($planet);
 
-        return $this->handleView(View::create($planet, Response::HTTP_CREATED));
+        return $this->handleView($this->view($planet, Response::HTTP_CREATED));
     }
 
     /**
@@ -66,7 +65,7 @@ class PlanetController extends FOSRestController
         /** @var Planet[] $planets */
         $planets = $this->planetRepository->getList();
 
-        return $this->handleView(View::create($planets, Response::HTTP_OK));
+        return $this->handleView($this->view($planets, Response::HTTP_OK));
     }
 
     /**
@@ -78,6 +77,6 @@ class PlanetController extends FOSRestController
      */
     public function getPlanetAction(Planet $planet): Response
     {
-        return $this->handleView(View::create($planet, Response::HTTP_OK));
+        return $this->handleView($this->view($planet, Response::HTTP_OK));
     }
 }
