@@ -23,24 +23,24 @@ class Planet
     private $id;
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotNull()
-     * @Assert\Length(min=0, max=255)
+     * @Assert\NotNull(message="A name is required")
+     * @Assert\Length(min=0, max=255, maxMessage="Name should be smaller than 255")
      *
      * @var string $name
      */
     private $name;
     /**
      * @ORM\Column(type="integer")
-     * @Assert\NotNull()
-     * @Assert\GreaterThanOrEqual(0)
+     * @Assert\NotNull(message="Age is required")
+     * @Assert\GreaterThanOrEqual(value="0", message="Age should be greater than 0")
      *
      * @var integer $age
      */
     private $age;
     /**
      * @ORM\Column(type="integer")
-     * @Assert\NotNull()
-     * @Assert\GreaterThanOrEqual(0)
+     * @Assert\NotNull(message="Population is required")
+     * @Assert\GreaterThanOrEqual(value="0", message="Population should be greater than 0")
      *
      * @var integer $population
      */
