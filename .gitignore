@@ -8,7 +8,6 @@
 
 
 .idea
-docker/*
 ###> symfony/phpunit-bridge ###
 .phpunit
 /phpunit.xml

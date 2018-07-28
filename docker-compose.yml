@@ -7,20 +7,16 @@ services:
     mysql:
         ports:
             - '3306:3306'
-        volumes:
-            - './docker/database:/var/lib/mysql'
         environment:
-            - MYSQL_DATABASE=docker
-            - MYSQL_USER=docker
-            - MYSQL_PASSWORD=docker
+            - MYSQL_DATABASE=db_name
+            - MYSQL_USER=db_user
+            - MYSQL_PASSWORD=db_password
             - MYSQL_RANDOM_ROOT_PASSWORD=yes
         image: 'mysql:5.7'
     php:
         volumes:
             - './:/usr/share/nginx/html'
-        environment:
-            - 'PHP_EXTENSIONS=pdo_mysql,intl,opcache'
-        image: 'okty/php:7.2'
+        build: 'docker/php'
     nginx:
         ports:
             - '8080:80'
